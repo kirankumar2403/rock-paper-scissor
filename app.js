@@ -26,7 +26,22 @@ const showWinner = (userWin, userChoice, compChoice) => {
     }
 }
 
-// Game condition 
+// Generate computer's choice randomly
+function genCompChoice() {
+    const choices = ["rock", "paper", "scissor"];
+    const randIdx = Math.floor(Math.random() * 3);
+    return choices[randIdx];
+}
+
+// Add event listeners to the choice elements
+const choices = document.querySelectorAll(".choice");
+choices.forEach(choice => {
+    choice.addEventListener("click", () => {
+        playGame(choice.id);
+    });
+});
+
+// Complete playGame logic to call showWinner
 const playGame = (userChoice) => {
     const compChoice = genCompChoice();
     if (userChoice === compChoice) {
@@ -41,6 +56,6 @@ const playGame = (userChoice) => {
         } else if (userChoice === "scissor") {
             userWin = compChoice === "paper"; // Scissor beats Paper
         }
-
+        showWinner(userWin, userChoice, compChoice);
     }
 }
